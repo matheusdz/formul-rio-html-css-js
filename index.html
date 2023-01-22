@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Formulário</title>
+</head>
+<body>
+    <div class="content">
+        <h1>Formulário</h1>
+        <form id="form"> 
+            <div>
+                <input type="text" name="nome" placeholder="Digite seu nome" class="inputs required" oninput="nameValidate()">
+                <span class="span-required">Nome deve ter no mínimo 4 caracteres</span>
+            </div>
+            <div>
+                <input type="text" name="sobrenome" placeholder="Digite seu sobrenome" class="inputs required" oninput="lastnameValidate()">
+                <span class="span-required">Sobrenome deve ter no mínimo 4 caracteres</span>
+            </div>
+            <div>
+                <input type="email" name="email" placeholder="Digite seu email" class="inputs required" oninput="emailValidate()">
+                <span class="span-required">Digite um email válido</span>
+            </div>
+            <p>Seu sexo:</p>
+            <div class="select">
+                <div>
+                    <input type="radio" name="sexos" id="M" value="M" checked>
+                    <label for="M">Masculino</label>
+                </div>
+                <div>
+                    <input type="radio" name="sexos" id="F" value="F">
+                    <label for="F">Feminino</label>
+                </div>
+                <div>
+                    <input type="radio" name="sexos" id="O" value="O">
+                    <label for="O">Outro</label>
+                </div>
+            </div>
+            <p>Experiências</p>
+            <div class="select">
+                <div>
+                    <input type="checkbox" name="Exp" id="React" value="React">
+                    <label for="React">React</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="Exp" id="Css" value="Css">
+                    <label for="Css">CSS</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="Exp" id="Js" value="Js">
+                    <label for="Js">Javascript</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="Exp" id="PHP" value="PHP">
+                    <label for="PHP">PHP</label>
+                </div>
+            </div>
+            <textarea class="inputs" name="des" id="desc" cols="25" rows="10" placeholder="Me conte sobre você..."></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+</body>
+<script>
+    const form   = document.getElementById('form');
+    const campos = document.querySelectorAll('.required');
+    const spans  = document.querySelectorAll('.span-required');
+    const emailRegex = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        nameValidate();
+        emailValidate();
+        lastnameValidate();
+    });
+
+    function setError(index){
+        campos[index].style.border = '2px solid #ce1818';
+        spans[index].style.display = 'block';
+    }
+
+    function removeError(index){
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+
+    function nameValidate(){
+        if(campos[0].value.length < 4)
+        {
+            setError(0);
+        }
+        else
+        {
+            removeError(0);
+        }
+    }
+
+    function lastnameValidate(){
+        if(campos[1].value.length < 4)
+        {
+            setError(1);
+        }
+        else
+        {
+            removeError(1);
+        }
+    }
+
+    function emailValidate(){
+    if(!emailRegex.test(campos[2].value))
+    {
+        setError(2);
+    }
+    else
+    {
+        removeError(2);
+    }
+}
+
+</script>
+</html>
